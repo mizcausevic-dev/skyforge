@@ -1,0 +1,112 @@
+{
+  "network": "Northstar Urban Air Mobility Grid",
+  "city": "Boston Metro AAM Corridor",
+  "vehicles": [
+    {
+      "vehicle_id": "evtol-101",
+      "name": "Harbor Arc 01",
+      "class": "passenger-evtol",
+      "corridor": "Seaport-to-Cambridge",
+      "task": "urban transfer",
+      "battery_pct": 74,
+      "separation_m": 112,
+      "wind_margin_pct": 68,
+      "override_ready": true,
+      "policy_envelope": "dense-corridor-separation",
+      "last_hold_minutes": 0
+    },
+    {
+      "vehicle_id": "evtol-208",
+      "name": "Beacon Wing 08",
+      "class": "passenger-evtol",
+      "corridor": "Fenway-to-Logan",
+      "task": "airport transfer",
+      "battery_pct": 53,
+      "separation_m": 61,
+      "wind_margin_pct": 52,
+      "override_ready": true,
+      "policy_envelope": "airport-arrival-stack",
+      "last_hold_minutes": 14
+    },
+    {
+      "vehicle_id": "drn-311",
+      "name": "Parcel Swift 11",
+      "class": "delivery-drone",
+      "corridor": "Brookline medical supply lane",
+      "task": "urgent payload drop",
+      "battery_pct": 47,
+      "separation_m": 38,
+      "wind_margin_pct": 44,
+      "override_ready": false,
+      "policy_envelope": "hospital-priority-lane",
+      "last_hold_minutes": 22
+    },
+    {
+      "vehicle_id": "evtol-415",
+      "name": "SkyRail 15",
+      "class": "cargo-evtol",
+      "corridor": "Waltham-to-Seaport",
+      "task": "cargo transfer",
+      "battery_pct": 66,
+      "separation_m": 84,
+      "wind_margin_pct": 58,
+      "override_ready": false,
+      "policy_envelope": "weather-diversion-window",
+      "last_hold_minutes": 31
+    }
+  ],
+  "events": [
+    {
+      "event_id": "air-9001",
+      "timestamp": "2026-05-12T19:06:00Z",
+      "vehicle_id": "drn-311",
+      "corridor": "Brookline medical supply lane",
+      "severity": "critical",
+      "event_type": "separation-breach",
+      "policy_triggered": "hospital-priority-lane",
+      "handoff_chain": ["swarm-sequencer", "airspace-guardian", "human-operations-lead"],
+      "override_applied": true,
+      "resolution_state": "rerouted",
+      "distance_m": 34
+    },
+    {
+      "event_id": "air-9002",
+      "timestamp": "2026-05-12T19:10:00Z",
+      "vehicle_id": "evtol-208",
+      "corridor": "Fenway-to-Logan",
+      "severity": "high",
+      "event_type": "arrival-stack-hold",
+      "policy_triggered": "airport-arrival-stack",
+      "handoff_chain": ["traffic-orchestrator", "vertiport-scheduler"],
+      "override_applied": false,
+      "resolution_state": "sequenced",
+      "distance_m": 58
+    },
+    {
+      "event_id": "air-9003",
+      "timestamp": "2026-05-12T19:15:00Z",
+      "vehicle_id": "evtol-415",
+      "corridor": "Waltham-to-Seaport",
+      "severity": "medium",
+      "event_type": "weather-diversion-warning",
+      "policy_triggered": "weather-diversion-window",
+      "handoff_chain": ["weather-daemon", "route-optimizer", "cargo-ops"],
+      "override_applied": false,
+      "resolution_state": "stabilized",
+      "distance_m": 0
+    },
+    {
+      "event_id": "air-9004",
+      "timestamp": "2026-05-12T19:18:00Z",
+      "vehicle_id": "evtol-101",
+      "corridor": "Seaport-to-Cambridge",
+      "severity": "low",
+      "event_type": "vertiport-slot-shift",
+      "policy_triggered": "dense-corridor-separation",
+      "handoff_chain": ["vertiport-mesh", "corridor-supervisor"],
+      "override_applied": false,
+      "resolution_state": "cleared",
+      "distance_m": 0
+    }
+  ]
+}
